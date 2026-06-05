@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { CiGlobe } from "react-icons/ci";
-import { FaXTwitter, FaLinkedin, FaGithub } from "react-icons/fa6";
+import { CiGlobe, CiMail } from "react-icons/ci";
+import { FaLinkedin, FaGithub } from "react-icons/fa6";
 
 interface TimeLeft {
   days: number;
@@ -86,12 +86,12 @@ export default function Landing() {
           <span className="group-hover:text-white text-xs font-medium text-slate-400 transition-colors duration-200">GitHub</span>
         </a>
 
-        <a className="group flex flex-col items-center gap-3 transition-transform duration-200 active:scale-95" rel="noopener noreferrer" href="https://x.com/insigniar6" target="_blank">
+        <a className="group flex flex-col items-center gap-3 transition-transform duration-200 active:scale-95" rel="noopener noreferrer" href="mailto:marioskaradimitris@gmail.com" target="_blank">
           <div className="group-hover:border-[#BB99FF]/40 group-hover:text-[#BB99FF] group-hover:shadow-[0_0_15px_rgba(141,81,250,0.2)] w-12 h-12 flex items-center justify-center border border-white/[0.05] text-white/80 rounded-full bg-[#16161c] transition-all duration-300">
-            <FaXTwitter className="group-hover:scale-105 w-5 h-5 transition-transform" />
+            <CiMail className="group-hover:scale-105 w-5 h-5 transition-transform" />
           </div>
 
-          <span className="group-hover:text-white text-xs font-medium text-slate-400 transition-colors duration-200">Twitter/X</span>
+          <span className="group-hover:text-white text-xs font-medium text-slate-400 transition-colors duration-200">E-mail</span>
         </a>
       </nav>
     </section>

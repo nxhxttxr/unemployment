@@ -43,6 +43,3 @@ next-env.d.ts
 # AI
 AGENTS.md
 CLAUDE.md
-
-# Components
-components/ui

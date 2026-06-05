@@ -3,6 +3,9 @@
 import { useEffect, useRef } from "react";
 import { Sora } from "next/font/google";
 import Landing from "@/components/custom/landing";
+import Stats from "@/components/custom/stats";
+import Journal from "@/components/custom/journal";
+import Playlist from "@/components/custom/playlist";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -138,12 +141,18 @@ export default function Page() {
 
   return (
     <div className={`${sora.variable} relative w-full overflow-x-hidden selection:text-white selection:bg-brand-purple/30`}>
+      {/* Background canvas effects and layers */}
       <div className="fixed inset-0 -z-9 bg-[#09090b]" />
       <canvas ref={canvasRef} className="fixed inset-0 -z-8 pointer-events-none" />
-
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[140%] h-[45vh] bg-[radial-gradient(ellipse_at_bottom,rgba(141,81,250,0.15),transparent_65%)] pointer-events-none -z-8" />
-    
+      
       <Landing />
+      <Stats />
+
+      <section className="relative max-w-2xl mx-auto mt-12 px-6 pb-32 z-10 space-y-12">
+        <Playlist />
+        <Journal />
+      </section>
     </div>
   );
 }

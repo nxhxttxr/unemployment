@@ -71,7 +71,7 @@ const CountUpItem = ({ title, targetValue, suffix, isVisible, icon }: StatItemPr
       <div className="max-w-[80%]">
         <h3 className="uppercase tracking-wider font-semibold text-zinc-500 text-xs pointer-events-none">{title}</h3>
         <p className="mt-2 tracking-tight font-light text-white text-2xl pointer-events-none" style={{ fontFamily: "var(--font-sora), sans-serif" }}>
-          {count.toLocaleString()} <span className="lowercase font-normal text-zinc-500 text-sm">{suffix}</span>
+          {count?.toLocaleString() || "0"} <span className="lowercase font-normal text-zinc-500 text-sm">{suffix}</span>
         </p>
       </div>
     </div>
@@ -91,28 +91,30 @@ export default function Stats() {
   useEffect(() => {
     const fetchStats = async () => {
       const CACHE_KEY = "portfolio_stats_cache";
-      const CACHE_TIME_KEY = "portfolio_stats_cache_time";
-      const THIRTY_MINUTES = 30 * 60 * 1000;
+      const LAST_FETCH_DATE_KEY = "portfolio_stats_last_date";
 
       try {
-        const cachedData = localStorage.getItem(CACHE_KEY);
-        const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
-        const now = Date.now();
+        const todayString = new Date().toISOString().split("T")[0];
 
-        if (cachedData && cachedTime && now - Number(cachedTime) < THIRTY_MINUTES) {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        const lastFetchDate = localStorage.getItem(LAST_FETCH_DATE_KEY);
+
+        if (cachedData && lastFetchDate === todayString) {
           setStatsData(JSON.parse(cachedData));
           return;
         }
 
-        const response = await fetch("/data/stats.json");
-        if (!response.ok) throw new Error("Failed to fetch stats");
+        // Fetch
+        const response = await fetch("https://raw.githubusercontent.com/nxhxttxr/data/refs/heads/main/stats.json");
+        if (!response.ok) throw new Error("Failed to fetch stats.");
         const data = await response.json();
 
+        // Sync
         setStatsData(data);
         localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-        localStorage.setItem(CACHE_TIME_KEY, now.toString());
+        localStorage.setItem(LAST_FETCH_DATE_KEY, todayString);
       } catch (error) {
-        console.error("Error reading stats flat file");
+        console.error("Error reading stats flat file", error);
       }
     };
 
