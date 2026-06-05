@@ -134,7 +134,7 @@ export default function Journal() {
                         <span className="font-normal text-zinc-500 text-xs">{entry.date}</span>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="mt-1 pt-1 pb-4 border-t border-white/[0.03] leading-relaxed text-zinc-400 text-sm whitespace-pre-line [&_a]:text-[#BB99FF] [&_a]:underline">
+                    <AccordionContent className="mt-1 pt-1 pb-4 border-t border-white/[0.03] leading-relaxed text-zinc-400 text-sm whitespace-pre-line [&_a]:text-[#BB99FF] [&_a:hover]:text-white [&_a]:underline">
                       {parse(entry.content)}
                     </AccordionContent>
                   </AccordionItem>
